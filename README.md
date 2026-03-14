@@ -1,5 +1,9 @@
 # X Focus Filter
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gcgccfdjkeaakmfahollcpmpfpijeack?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white&color=b07028)](https://chromewebstore.google.com/detail/x-focus-filter/gcgccfdjkeaakmfahollcpmpfpijeack)
+
+**[Install from Chrome Web Store](https://chromewebstore.google.com/detail/x-focus-filter/gcgccfdjkeaakmfahollcpmpfpijeack)**
+
 **A Chrome extension that filters your X (Twitter) timeline to only show content you actually care about.**
 
 Tired of scrolling through spam, NSFW content, crypto scams, and engagement bait on X? X Focus Filter uses local keyword matching to hide irrelevant tweets and surface only the topics that matter to you — Tech, AI, Business, Open Source, and more.
