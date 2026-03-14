@@ -10,6 +10,8 @@ Tired of scrolling through spam, NSFW content, crypto scams, and engagement bait
 
 No API keys. No data collection. No server. Everything runs locally in your browser.
 
+<img src="./screenshots/popup.png" width="340" alt="X Focus Filter popup interface" />
+
 ## The Problem
 
 X's timeline is full of noise:
@@ -78,10 +80,6 @@ Tweet loads → Keyword matching → Show or Hide
 4. Click **Load unpacked** and select the cloned folder
 
 5. Navigate to [x.com](https://x.com) — the extension starts working automatically
-
-## Screenshot
-
-<img src="./screenshots/popup.png" width="340" alt="X Focus Filter popup interface" />
 
 ## How the Keyword Matching Works
 
