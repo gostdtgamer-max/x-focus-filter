@@ -1,4 +1,4 @@
-// X Focus Filter - Content Script v1.1
+// X Focus Filter - Content Script v1.2
 // Filters timeline to show only Tech/AI/Business/Open Source content
 
 (function () {
@@ -13,8 +13,11 @@
     mode: 'whitelist',
     filterMode: 'normal', // strict | normal | relaxed
     showStats: true,
+    showBadge: true,
+    filterAds: true,
     opacity: 0.0,
     categories: { tech: true, ai: true, business: true, opensource: true, design: false, crypto: false, indie: false, career: false },
+    customCategories: [],
     customWhitelist: [],
     customBlacklist: [],
     whitelistedUsers: [],
@@ -230,32 +233,42 @@
     });
   }
 
+  // Returns { show: boolean, reason: string }
   function shouldShowTweet(tweetText, userName) {
-    if (!config.enabled) return true;
+    if (!config.enabled) return { show: true, reason: '' };
 
     // Always show whitelisted users
     if (config.whitelistedUsers.length > 0) {
       const nu = userName?.toLowerCase() || '';
-      if (config.whitelistedUsers.some(u => nu.includes(u.toLowerCase()))) return true;
+      if (config.whitelistedUsers.some(u => nu.includes(u.toLowerCase()))) {
+        return { show: true, reason: '' };
+      }
     }
 
     // Blacklist always applies
     const allBlacklist = [...BLACKLIST, ...config.customBlacklist];
-    if (matchesKeywords(tweetText, allBlacklist)) return false;
+    const blacklistHit = findMatchingKeyword(tweetText, allBlacklist);
+    if (blacklistHit) return { show: false, reason: `blacklist: ${blacklistHit}` };
 
     // Build active whitelist
     let activeKeywords = [...config.customWhitelist];
     for (const [cat, enabled] of Object.entries(config.categories)) {
       if (enabled && KEYWORDS[cat]) {
         activeKeywords.push(...KEYWORDS[cat]);
-        // Relaxed mode: add extra terms
         if (config.filterMode === 'relaxed' && RELAXED_EXTRA[cat]) {
           activeKeywords.push(...RELAXED_EXTRA[cat]);
         }
       }
     }
 
-    const matched = matchesKeywords(tweetText, activeKeywords);
+    // Include custom categories keywords
+    if (config.customCategories?.length > 0) {
+      for (const cc of config.customCategories) {
+        if (cc.keywords?.length > 0) {
+          activeKeywords.push(...cc.keywords);
+        }
+      }
+    }
 
     // Strict mode: require at least 2 keyword matches
     if (config.filterMode === 'strict') {
@@ -269,12 +282,42 @@
         } else {
           if (normalized.includes(lower)) matchCount++;
         }
-        if (matchCount >= 2) return true;
+        if (matchCount >= 2) return { show: true, reason: '' };
       }
-      return false;
+      return { show: false, reason: 'no match (strict)' };
     }
 
-    return matched;
+    const matched = matchesKeywords(tweetText, activeKeywords);
+    return { show: matched, reason: matched ? '' : 'no match' };
+  }
+
+  // Returns the first matching keyword or null
+  function findMatchingKeyword(text, keywords) {
+    const normalized = normalizeText(text);
+    for (const kw of keywords) {
+      const lower = kw.toLowerCase();
+      if (lower.length <= 3) {
+        const regex = new RegExp(`\\b${escapeRegex(lower)}\\b`, 'i');
+        if (regex.test(normalized)) return kw;
+      } else {
+        if (normalized.includes(lower)) return kw;
+      }
+    }
+    return null;
+  }
+
+  // Detect promoted/ad tweets
+  function isAdTweet(article) {
+    // X marks promoted tweets with specific elements
+    const promoted = article.querySelector('[data-testid="placementTracking"]');
+    if (promoted) return true;
+    // Check for "Ad" / "Promoted" / "推广" label in social context
+    const socialCtx = article.querySelector('[data-testid="socialContext"]');
+    if (socialCtx) {
+      const txt = socialCtx.textContent.toLowerCase();
+      if (txt === 'ad' || txt === 'promoted' || txt === '推广') return true;
+    }
+    return false;
   }
 
   // =========================================================================
@@ -316,21 +359,33 @@
   }
 
   function processTweet(article) {
-    if (article.getAttribute(PROCESSED_ATTR) === config.filterMode + config.enabled) return;
-    article.setAttribute(PROCESSED_ATTR, config.filterMode + config.enabled);
+    if (article.getAttribute(PROCESSED_ATTR) === config.filterMode + config.enabled + config.filterAds) return;
+    article.setAttribute(PROCESSED_ATTR, config.filterMode + config.enabled + config.filterAds);
 
-    const text = getTweetText(article);
-    const user = getUserName(article);
     const cellInner = article.closest('[data-testid="cellInnerDiv"]');
     const target = cellInner || article;
 
     stats.total++;
 
-    if (shouldShowTweet(text, user)) {
+    // Filter ads first
+    if (config.filterAds && isAdTweet(article)) {
+      stats.hidden++;
+      target.setAttribute('data-xfilter-reason', 'ad');
+      setHidden(target, true);
+      return;
+    }
+
+    const text = getTweetText(article);
+    const user = getUserName(article);
+    const result = shouldShowTweet(text, user);
+
+    if (result.show) {
       stats.shown++;
+      target.removeAttribute('data-xfilter-reason');
       setHidden(target, false);
     } else {
       stats.hidden++;
+      target.setAttribute('data-xfilter-reason', result.reason);
       setHidden(target, true);
     }
   }
@@ -377,7 +432,11 @@
   }
 
   function updateBadge() {
-    if (!badge || !config.showStats) return;
+    if (!badge) return;
+    if (!config.showBadge) {
+      badge.style.display = 'none';
+      return;
+    }
     const text = badge.querySelector('.xfilter-badge-text');
     const toggle = badge.querySelector('.xfilter-badge-toggle');
     text.textContent = `${stats.shown} ✓ · ${stats.hidden} ✗`;
@@ -473,7 +532,7 @@
     createBadge();
     processAllTweets();
     startObserver();
-    console.log('[X Focus Filter] v1.1 Initialized ✓');
+    console.log('[X Focus Filter] v1.2 Initialized ✓');
   }
 
   if (document.readyState === 'loading') {

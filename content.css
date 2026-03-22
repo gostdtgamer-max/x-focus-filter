@@ -32,7 +32,7 @@ article[data-testid="tweet"]:not([data-xfilter-processed]) {
 }
 
 .xfilter-peek::before {
-  content: '🚫 filtered';
+  content: '🚫 ' attr(data-xfilter-reason);
   position: absolute;
   top: 8px;
   right: 12px;

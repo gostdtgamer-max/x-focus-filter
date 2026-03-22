@@ -1,4 +1,4 @@
-// X Focus Filter - Popup Script v1.1
+// X Focus Filter - Popup Script v1.2
 
 // ── i18n ──
 const I18N = {
@@ -208,7 +208,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   masterToggle.addEventListener('change', () => doSave());
 
   async function doSave() {
+    // Preserve existing config fields set from options page
+    const existing = (await chrome.storage.local.get('xfilter_config')).xfilter_config || {};
     const newConfig = {
+      ...existing,
       enabled: masterToggle.checked,
       mode: 'whitelist',
       filterMode: currentMode,
