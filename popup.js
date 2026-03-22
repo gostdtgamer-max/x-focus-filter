@@ -113,6 +113,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const peekBtn = document.getElementById('peekBtn');
   const modeBtns = document.querySelectorAll('.mode-btn');
 
+  // Open options page
+  document.getElementById('openOptions').addEventListener('click', () => {
+    chrome.runtime.openOptionsPage();
+  });
+
   // Load config
   const result = await chrome.storage.local.get('xfilter_config');
   const config = result.xfilter_config || {};

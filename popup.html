@@ -46,6 +46,12 @@
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text); }
     .header-right { display: flex; align-items: center; gap: 10px; }
+    .gear-btn {
+      background: none; border: none; cursor: pointer; font-size: 16px;
+      color: var(--text-dim); padding: 2px; line-height: 1;
+      transition: color 0.15s;
+    }
+    .gear-btn:hover { color: var(--accent); }
 
     /* ── Toggle ── */
     .toggle-switch { position: relative; width: 36px; height: 20px; cursor: pointer; flex-shrink: 0; }
@@ -162,6 +168,7 @@
       <span class="logo-text">X Focus Filter</span>
     </div>
     <div class="header-right">
+      <button class="gear-btn" id="openOptions" title="Settings">⚙</button>
       <div class="lang-switch">
         <button class="lang-btn" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="zh">中文</button>

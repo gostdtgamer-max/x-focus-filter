@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Focus Filter - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-left">
+        <h1 class="logo">𝕏 Focus Filter</h1>
+        <span class="subtitle" data-i18n="settings">Settings</span>
+      </div>
+      <button class="lang-toggle" id="langToggle">EN</button>
+    </header>
+
+    <!-- Built-in Categories -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="builtinCategories">Built-in Categories</h2>
+      <p class="section-desc" data-i18n="builtinDesc">These keyword lists are used to match tweets in your timeline. They are read-only.</p>
+      <div id="builtinList" class="category-list"></div>
+    </section>
+
+    <!-- Custom Categories -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="customCategories">Custom Categories</h2>
+      <p class="section-desc" data-i18n="customDesc">Create your own keyword categories to extend filtering.</p>
+      <button class="btn btn-primary" id="addCategoryBtn">
+        <span data-i18n="addCategory">+ Add Category</span>
+      </button>
+      <div id="customList" class="category-list" style="margin-top: 12px;"></div>
+    </section>
+
+    <!-- Settings -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="settingsTitle">Settings</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label" data-i18n="showBadge">Show floating badge</span>
+          <span class="setting-desc" data-i18n="showBadgeDesc">Display the filter status badge on the timeline page</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="showBadge">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label" data-i18n="filterAds">Filter ads & promoted tweets</span>
+          <span class="setting-desc" data-i18n="filterAdsDesc">Automatically hide promoted and advertisement tweets</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="filterAds">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Import/Export -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="importExport">Import / Export</h2>
+      <p class="section-desc" data-i18n="importExportDesc">Backup or restore your configuration as a JSON file.</p>
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="exportBtn">
+          <span data-i18n="export">Export Config</span>
+        </button>
+        <button class="btn btn-secondary" id="importBtn">
+          <span data-i18n="import">Import Config</span>
+        </button>
+        <input type="file" id="importFile" accept=".json" style="display:none;">
+      </div>
+      <div id="feedback" class="feedback hidden"></div>
+    </section>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
